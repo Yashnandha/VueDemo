@@ -17,8 +17,9 @@
                 type="text"
                 class="inputs"
                 placeholder="yourmail@tulips.com"
-                v-model="user.email"
+                v-model="userDetails.email"
               />
+              <text class="errorMsg">{{ error.emailErr }}</text>
             </div>
 
             <div class="inputContainer">
@@ -29,8 +30,9 @@
                 class="inputs"
                 maxlength="25"
                 placeholder="******"
-                v-model="userPassword"
+                v-model="userDetails.password"
               />
+              <text class="errorMsg">{{ error.passwordErr }}</text>
             </div>
 
             <div>
@@ -44,15 +46,31 @@
 </template>
 
 <script setup>
-const user = ref(
+// Store user email and password
+const userDetails = ref(
   reactive({
     email: '',
+    password: '',
+  }),
+);
+
+const error = ref(
+  reactive({
+    emailErr: '',
+    passwordErr: '',
   }),
 );
 
 const submit = async () => {
-    console.log(user.value)
-}
+  if (
+    userDetails.value.email != 'admin@tulips.com' &&
+    userDetails.value.password != 'Newpass123!'
+  ) {
+ alert('Please enter valid credential')
+  } else {
+    navigateTo('/homeScreen');
+  }
+};
 </script>
 
 <style>
@@ -125,6 +143,10 @@ const submit = async () => {
   flex-direction: column;
 }
 
-.buttonContainer {
+.errorMsg {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 5px;
+  color: rgb(251, 39, 39);
 }
 </style>
