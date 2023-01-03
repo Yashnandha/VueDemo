@@ -56,19 +56,37 @@ const userDetails = ref(
 
 const error = ref(
   reactive({
-    emailErr: '',
-    passwordErr: '',
+    emailErr: null,
+    passwordErr: null,
   }),
 );
 
 const submit = async () => {
-  if (
-    userDetails.value.email != 'admin@tulips.com' &&
-    userDetails.value.password != 'Newpass123!'
-  ) {
- alert('Please enter valid credential')
+  var isValid = true
+  let emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+  if(userDetails.value.email == ''){
+    isValid = false
+    error.value.emailErr = 'Please enter your email address'
+  } else if (!emailRegex.test(userDetails.value.email)){
+    isValid = false
+    error.value.emailErr = 'Please enter valid email address'
+  }else  {
+    error.value.emailErr = null
+  }
+
+  if (userDetails.value.password == '') {
+    isValid = false
+    error.value.passwordErr = 'Please enter your password'
+  } else if (userDetails.value.password.length <= 8) {
+    isValid = false
+    error.value.passwordErr = 'Please enter 8 digit password'
   } else {
-    navigateTo('/homeScreen');
+    error.value.passwordErr = null
+  }
+
+  if (isValid) {
+    navigateTo('/homeScreen')
   }
 };
 </script>
@@ -148,5 +166,6 @@ const submit = async () => {
   font-weight: 300;
   margin-bottom: 5px;
   color: rgb(251, 39, 39);
+  margin-top: 5px;
 }
 </style>
