@@ -4,8 +4,6 @@ import 'vuetify/dist/vuetify.min.css';
 
 Vue.use(Vuetify);
 
-export default new Vuetify({
-  icons: {
-    iconfont: 'fa',
-  },
-});
+const opts = {};
+
+export default new Vuetify(opts);
