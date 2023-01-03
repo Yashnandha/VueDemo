@@ -3,15 +3,9 @@ export default defineNuxtConfig({
     css: [
         "@/assets/appStyle.css"
     ],
-    app: { head: { title: 'TULIPS Dev', } },
+    //  Header title
+    app: {
+        head: { title: 'TULIPS Dev', },
+    },
+
 })
-
-{
-    buildModules: [
-        // Simple usage
-        '@nuxtjs/vuetify',
-
-        // With options
-        ['@nuxtjs/vuetify', { /* module options */ }]
-    ]
-}
